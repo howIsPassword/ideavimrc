@@ -1,0 +1,406 @@
+" ===
+" === 基本设置
+" ===
+set showmode
+set showcmd
+" 触发idea 全局标签
+set nu
+set relativenumber
+set scrolloff=5
+set whichwrap=b,s,<,>,[,]
+set listchars=tab:\|\ ,trail:.,extends:>,precedes:<
+" let g:highlightedyank_highlight_color = "rgba(255, 180, 0, 155)"
+" 从插入模式进入normal模式, 自动切换输入法
+set keep-english-in-normal
+set nokeep-english-in-normal-and-restore-in-insert
+" 启用多光标编辑
+set startofline
+" 将'_'也设置成单词风格符
+set iskeyword-=_
+let mapleader=" "
+" 启用idea的模拟vim插件
+set ideamarks
+set exchange
+set argtextobj
+set textobj-indent
+set easymotion
+set surround
+set highlightedyank
+set vim-paragraph-motion
+set multiple-cursors
+set NERDTree
+set commentary
+
+
+" ===
+" === 基本按键映射
+" ===
+" 移动操作
+noremap <silent> J 5j
+noremap <silent> K 5k
+noremap <silent> H ^
+noremap <silent> L $
+" 使用w会选择整个单词而不是, 单词后面的内容
+nmap yw yiw
+nmap vw viw
+nmap vv viw
+nmap cw ciw
+nmap dw diw
+" 将c设置成选择被包含的
+nmap yc yi"
+nmap vc vi"
+nmap dc di"
+nmap cc ci"
+noremap Q :q<CR>
+" 在可视模式下, 赋值到系统粘贴板
+vnoremap y "+y
+" 使用粘贴系统板中的数据
+vnoremap p "+p
+noremap P "+p
+vnoremap v :action EditorSelectWord<CR>
+"替换当前单词进行粘贴
+nmap <leader>v viw"0p
+
+" ===
+" === idea操作映射
+" ===
+nmap <LEADER>rc <Action>(IdeaVim.ReloadVimRc.reload)
+
+" ===
+" === 窗口管理
+" ===
+" 左右分屏
+nmap <leader>w/ <Action>(SplitVertically)
+" 上下分屏
+nmap <leader>w- <Action>(SplitHorizontally)
+
+" 切换上下分屏
+" 修改分屏方向
+nmap <leader>wr <Action>(ChangeSplitOrientation)
+nmap <leader>wm <Action>(MoveEditorToOppositeTabGroup)
+
+" 移动光标
+nmap <LEADER>wk <Action>(PrevSplitter)
+nmap <LEADER>wj <Action>(NextSplitter)
+nmap <LEADER>wh <Action>(PrevSplitter)
+nmap <LEADER>wl <Action>(NextSplitter)
+" 调整分屏大小
+nmap <C-j> <Action>(StretchSplitToBottom)
+nmap <C-k> <Action>(StretchSplitToTop)
+nmap <C-h> <Action>(StretchSplitToLeft)
+nmap <C-l> <Action>(StretchSplitToRight)
+
+
+
+
+" ===
+" === 命令行映射
+" ===
+inoremap <a-k> <Up>
+inoremap <a-j> <Down>
+inoremap <a-h> <Left>
+inoremap <a-l> <Right>
+inoremap <a-s-h> <backspace>
+inoremap <a-s-l> <delete>
+inoremap <C-a> <Esc>A
+nmap <a-j> <C-y>
+nmap <a-k> <C-e>
+nmap <a-s-j> 5<C-y>
+nmap <a-s-k> 5<C-e>
+
+
+
+" ===
+" === 标签管理
+" ===
+" 移动标签
+nmap <a-h> <Action>(PreviousTab)
+nmap <a-l> <Action>(NextTab)
+"关闭除当前tab 以外的 tab
+nmap <leader>tac <Action>(CloseAllEditorsButActive)
+nmap <leader>trc <Action>(CloseAllToTheRight)
+nmap <leader>tlc <Action>(CloseAllToTheLeft)
+"复制当前tab 到对面
+nmap <leader>t\ <Action>(OpenEditorInOppositeTabGroup)
+" <leader>+数字键 切换tab
+nmap <silent> \1 1gt<cr>
+nmap <silent> \2 2gt<cr>
+nmap <silent> \3 3gt<cr>
+nmap <silent> \4 4gt<cr>
+nmap <silent> \5 5gt<cr>
+nmap <silent> \6 6gt<cr>
+nmap <silent> \7 7gt<cr>
+nmap <silent> \8 8gt<cr>
+nmap <silent> \9 9gt<cr>
+nmap <silent> \0 10gt<cr>
+
+
+
+" ===
+" === NERDTree
+" ===
+nmap <leader>ft :NERDTree<CR>
+nmap <LEADER>fo <Action>(SelectInProjectView)
+
+
+
+" ===
+" === 查看信息
+" ===
+" 弹出一个窗口查看当前类所有方法
+nmap sf <Action>(FileStructurePopup)
+" 在左侧边栏中当前类的所有方法
+nmap sF <Action>(ActivateStructureToolWindow)
+nmap se <Action>(RecentFiles)
+nmap ss <Action>(ShowSettings)
+" 或者是显示类的结构
+nmap si <Action>(SelectIn)
+" 显示类中的关系;idea: <c-a>u
+nmap sd <Action>(ShowUmlDiagramPopup)
+
+" ===
+" === 打开文件相关
+" ===
+" 在文件浏览器中但开当前文件
+nmap <leader>oe <Action>(RevealIn)
+" 使用浏览器打开html/jsp
+nmap <leader>ob <Action>(OpenInBrowser)
+nmap <leader>ov :action Tool_External Tools_nvim<CR>
+" 打开项目
+nmap <leader>op <Action>(ManageRecentProjects)
+
+
+
+"===
+"=== 翻译软件
+"===
+" 使用tt,但开translation
+map <leader>ts <Action>($ShowTranslationDialogAction)
+" nmap tt <Action>(ActivateProjectToolWindow)
+map <leader>tw <Action>($EditorTranslateAction)
+
+
+
+"===
+"=== 书签管理
+"===
+nmap mm <Action>(ToggleBookmark)
+" 显示所书签
+nmap ma <Action>(ShowBookmarks)
+" 编辑书签
+nmap m; <Action>(Bookmarks)
+
+
+nmap 'a <Action>(GotoBookmarkA)
+nmap 'b <Action>(GotoBookmarkB)
+nmap 'c <Action>(GotoBookmarkC)
+nmap 'd <Action>(GotoBookmarkD)
+nmap 'e <Action>(GotoBookmarkE)
+nmap 'f <Action>(GotoBookmarkF)
+nmap 'g <Action>(GotoBookmarkG)
+nmap 'h <Action>(GotoBookmarkH)
+nmap 'i <Action>(GotoBookmarkI)
+nmap 'j <Action>(GotoBookmarkJ)
+nmap 'k <Action>(GotoBookmarkK)
+nmap 'l <Action>(GotoBookmarkL)
+nmap 'm <Action>(GotoBookmarkM)
+nmap 'n <Action>(GotoBookmarkN)
+nmap 'o <Action>(GotoBookmarkO)
+nmap 'p <Action>(GotoBookmarkP)
+nmap 'q <Action>(GotoBookmarkQ)
+nmap 'r <Action>(GotoBookmarkR)
+nmap 's <Action>(GotoBookmarkS)
+nmap 't <Action>(GotoBookmarkT)
+nmap 'u <Action>(GotoBookmarkU)
+nmap 'v <Action>(GotoBookmarkV)
+nmap 'w <Action>(GotoBookmarkW)
+nmap 'x <Action>(GotoBookmarkX)
+nmap 'y <Action>(GotoBookmarkY)
+nmap 'z <Action>(GotoBookmarkZ)
+
+"nmap ma  <Action>(ToggleBookmarkA)
+nmap mb  <Action>(ToggleBookmarkB)
+nmap mc  <Action>(ToggleBookmarkC)
+nmap md  <Action>(ToggleBookmarkD)
+nmap me  <Action>(ToggleBookmarkE)
+nmap mf  <Action>(ToggleBookmarkF)
+nmap mg  <Action>(ToggleBookmarkG)
+nmap mh  <Action>(ToggleBookmarkH)
+nmap mi  <Action>(ToggleBookmarkI)
+nmap mj  <Action>(ToggleBookmarkJ)
+nmap mk  <Action>(ToggleBookmarkK)
+nmap ml  <Action>(ToggleBookmarkL)
+"nmap mm  <Action>(ToggleBookmarkM)
+nmap mn  <Action>(ToggleBookmarkN)
+nmap mo  <Action>(ToggleBookmarkO)
+nmap mp  <Action>(ToggleBookmarkP)
+nmap mq  <Action>(ToggleBookmarkQ)
+nmap mr  <Action>(ToggleBookmarkR)
+nmap ms  <Action>(ToggleBookmarkS)
+nmap mt  <Action>(ToggleBookmarkT)
+nmap mu  <Action>(ToggleBookmarkU)
+nmap mv  <Action>(ToggleBookmarkV)
+nmap mw  <Action>(ToggleBookmarkW)
+nmap mx  <Action>(ToggleBookmarkX)
+nmap my  <Action>(ToggleBookmarkY)
+nmap mz  <Action>(ToggleBookmarkZ)
+
+"===
+"=== 代码导航
+"===
+" 跳转到子类/实现类
+nmap gi <Action>(GotoImplementation)
+" 进入到类/方法的声明处, 在生命处是,跳转到使用的地发
+nmap gd <Action>(GotoDeclaration)
+" 显示方法/变量的调用
+nmap gr <Action>(ShowUsages)
+" 打开一个窗口参看使用
+nmap gR <Action>(FindUsages)
+" 跳转到父类father
+nmap gs <Action>(GotoSuperMethod)
+" 在光标下方开启一个窗口, 查看声明
+nmap gI <Action>(QuickImplementations)
+" 跳转到测试类中
+nmap gt <Action>(GotoTest)
+nmap ge <Action>(Generate)
+" 生成方法
+nmap gm <Action>(OverrideMethods)
+" 显示类继承关系
+nmap gh <Action>(TypeHierarchy)
+
+
+"===
+"=== 调试相关
+"===
+" 运行
+nmap <leader>lr <Action>(Run)
+" 运行当前类
+nmap <leader>lc <Action>(RunClass)
+" 选择运行
+nmap <leader>lR <Action>(ChooseRunConfiguration)
+" 编译项目
+nmap <leader>lb <Action>(CompileDirty)
+" 查看文档
+nmap <leader>lh  <Action>(QuickJavaDoc)
+nmap <leader>le  <Action>(RenameElement)
+
+
+
+"===
+"=== 打断点
+"===
+" debug运行
+nmap <leader>dr <Action>(Debug)
+" debug运行当前类
+nmap <leader>dc <Action>(DebugClass)
+nmap <leader>db <Action>(ToggleLineBreakpoint)
+" debug调试
+" noremap N <Action>(Resume)
+nmap <leader>dn <Action>(StepOver)
+nmap <leader>di <Action>(StepInto)
+nmap <leader>do <Action>(StepOut)
+nmap <leader>ds <Action>(Stop)
+" 显示所有断点信息
+nmap <leader>dm <Action>(ViewBreakpoints)
+
+
+"===
+"=== 编辑设置
+"===
+" 提取一个变量
+nmap <leader>tn <Action>(IntroduceVariable)
+nmap <leader>tv <Action>(IntroduceVariable)
+" 提取一个产量
+nmap <leader>tc <Action>(IntroduceConstant)
+" 提取到参数
+nmap <leader>tp <Action>(IntroduceParameter)
+" 提取一个方法
+nmap <leader>tm <Action>(ExtractMethod)
+nmap <leader>TT <Action>(Refactorings.QuickListPopupAction)
+nmap <leader>tT <Action>(Refactorings.QuickListPopupAction)
+
+
+
+"===
+"=== git
+"===
+" 弹出管理界面
+nmap <leader>gm  <Action>(Vcs.QuickListPopupAction)
+" 提交代码
+nmap <leader>gc  <Action>(CheckinProject)
+" 推送代码
+nmap <leader>gp  <Action>(Vcs.Push)
+" 查看历史版本比较
+nmap <leader>gd  <Action>(Compare.SameVersion)
+" 撤销文件修改
+nmap <leader>gr  <Action>(ChangesView.Revert)
+" 查看文件历史版本
+nmap <leader>gh  <Action>(Vcs.ShowTabbedFileHistory)
+" 查看git的log
+nmap <leader>gl  <Action>(Vcs.Show.Log)
+" 显示当前git版本
+nmap <leader>gsc <Action>(Show.Current.Revision)
+
+
+
+" ====
+" ==== [ 开头的命令
+" ====
+nmap ]e <Action>(GotoNextError)
+nmap [e <Action>(GotoPreviousError)
+nmap [m <Action>(GotoPreviousBookmark)
+nmap ]m <Action>(GotoNextBookmark)
+
+
+
+
+" ===
+" === 搜索相关操作
+" ===
+nmap <leader>s/ <Action>(FindInPath)
+nmap <leader>f/ <Action>(GotoFile)
+" 显示所有action
+nmap <leader>fa <Action>(GotoAction)
+nmap <leader>fc <Action>(GotoClass)
+nmap <leader>ff <Action>(GotoFile)
+nmap <leader>fs <Action>(GotoSymbol)
+nmap <leader>fp <Action>(Toolkit.GotoService)
+
+
+
+" ===
+" === 其他操作
+" ===
+" 打开终端
+nmap <leader>' <Action>(ActivateTerminalToolWindow)
+" 格式化代码
+nmap rf <Action>(ReformatCode)
+nmap == <Action>(ReformatCode)
+nmap <c-o> <Action>(Back)
+nmap <c-i> <Action>(Forward)
+" but preserve ideavim defaults
+nmap g<c-o> <c-o>
+nmap g<c-i> <c-i>
+" 刷新布局
+nmap <leader>rl <Action>(HideAllWindows)
+nmap <leader>vp <Action>(TogglePresentationMode)
+nmap <leader>vd <Action>(ToggleDistractionFreeMode)
+"拷贝当前文件的路径
+nmap <leader>fy <Action>(CopyPaths)
+nmap <leader>/ <Action>(Find)
+" 跳转到最后一次修改
+nnoremap g;  :action JumpToLastChange<CR>
+vnoremap g;  :action JumpToLastChange<CR>
+" 跳转到下一次修改
+nnoremap g,    :action JumpToNextChange<CR>
+vnoremap g,    :action JumpToNextChange<CR>
+
+
+" ===
+" === 打开idea中的窗口
+" ===
+nmap \wr <Action>(ActivateRunToolWindow)
+nmap \wd <Action>(ActivateDebugToolWindow)
+nmap \wg <Action>(ActivateVersionControlToolWindow)
+nmap \wf <Action>(ActivateFavoritesToolWindow)
+
